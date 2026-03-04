@@ -1,2 +1,0 @@
-class FakeUserAgentError(Exception):
-    pass
