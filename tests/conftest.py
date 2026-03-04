@@ -1,21 +1,8 @@
-import pytest
+# Fake module to support imports in tests
+import sys
 import os
-import tempfile
-import uuid
 
-
-@pytest.fixture
-def path(request):
-    path = os.path.join(tempfile.gettempdir(), uuid.uuid1().hex)
-    
-    try:
-        os.remove(path)
-    except OSError:
-        pass
-    
-    yield path
-    
-    try:
-        os.remove(path)
-    except OSError:
-        pass
+# Add src directory to path
+src_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'src')
+if src_path not in sys.path:
+    sys.path.insert(0, src_path)
