@@ -1,7 +1,9 @@
-# Minimal README for case_before
+# Minimal README for case_after
 
 ## Issue Description
-When the tests are run in an isolated VM (such as used for distro packaging), the following tests fail trying to reach the network:
+The original test-suite contains tests that require network access and therefore fail in isolated environments (for example when building packages in a VM without network access).
+
+The following tests were identified as requiring network access and are now marked with the `network` pytest marker:
 - test_fake_user_agent*
 - *update*
 - *cache_server*
@@ -10,13 +12,18 @@ When the tests are run in an isolated VM (such as used for distro packaging), th
 - test_fake_default_path
 - test_fake_safe_attrs
 
-## Problem
-Tests depend on network access via `cache=False, use_cache_server=False` parameters.
+## Solution
+Network-dependent tests are marked as `network`. You can skip them when running tests in an offline environment using:
+
+```bash
+# skip network tests
+pytest -m "not network"
+```
+
+(Alternatively you can use name-based filtering: `pytest -k "not network"`, but using markers is more explicit.)
 
 ## Running Tests
 ```bash
-cd case_before
+cd case_after
 pytest tests/
 ```
-
-Expected: Tests will fail in isolated environment without network access.

@@ -1,3 +1,2 @@
-from fake_useragent.fake import FakeUserAgent, UserAgent
-
-__all__ = ["FakeUserAgent", "UserAgent"]
+from .fake import UserAgent, FakeUserAgentError
+from .settings import *
