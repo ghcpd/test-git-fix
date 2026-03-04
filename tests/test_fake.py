@@ -17,6 +17,7 @@ def teardown_function(function):
         pass
 
 
+@pytest.mark.network
 def test_fake_user_agent_browsers():
     """This test requires network access and will fail in isolated environment"""
     ua = UserAgent(cache=False, use_cache_server=False)
@@ -24,6 +25,7 @@ def test_fake_user_agent_browsers():
     assert ua.chrome
 
 
+@pytest.mark.network
 def test_fake_default_path():
     """This test requires network access and will fail in isolated environment"""
     assert not os.path.isfile(settings.DB)
@@ -34,6 +36,7 @@ def test_fake_default_path():
     assert os.path.isfile(settings.DB)
 
 
+@pytest.mark.network
 def test_fake_update():
     """This test requires network access and will fail in isolated environment"""
     ua = UserAgent(cache=False, use_cache_server=False)
@@ -43,6 +46,7 @@ def test_fake_update():
     assert ua.chrome
 
 
+@pytest.mark.network
 def test_fake_safe_attrs():
     """This test requires network access and will fail in isolated environment"""
     ua = UserAgent(safe_attrs=("__injections__",))
